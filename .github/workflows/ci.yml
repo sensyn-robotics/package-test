@@ -30,8 +30,7 @@ jobs:
         run: yarn install -s --no-progress
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  build_monitor:
-    needs: [settings, code_quality]
+  build_dummy:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     outputs:
@@ -48,10 +47,6 @@ jobs:
           context: ./
           file: ./docker/Dockerfile
           push: true
-          tags: |
-            ${{ env.MONITOR_REPOS }}:${{ env.IMAGE_TAG }}
-            ${{ env.MONITOR_REPOS }}:${{ github.sha }}
           build-args: |
             GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
-          cache-from: type=registry,ref=${{ env.MONITOR_REPOS }}:${{ env.IMAGE_TAG }}
           cache-to: type=inline
