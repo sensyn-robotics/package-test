@@ -47,6 +47,7 @@ jobs:
           context: ./
           file: ./docker/Dockerfile
           push: true
+          tags: lalala:test
           build-args: |
             GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
           cache-to: type=inline
